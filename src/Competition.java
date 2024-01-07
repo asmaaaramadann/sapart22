@@ -3,10 +3,30 @@ import java.util.ArrayList;
 
 public class Competition {
 
+    private String competitionName;
+    private int competitionID;
+
     private ArrayList<Competitor> competitorsList;
 
-    public Competition() {
+    public Competition(String competitionName, int competitionID) {
+       this.competitionName = competitionName;
+       this.competitionID = competitionID;
         this.competitorsList = new ArrayList<>();
+    }
+
+    public String getcompetitionName() {
+        return competitionName;
+    }
+    public void setCompetitionName(String competitionName) {
+        this.competitionName = competitionName;
+    }
+
+    public int getCompetitionID(){
+        return competitionID;
+    }
+
+    public void setCompetitionID(int competitionID){
+        this.competitionID = competitionID;
     }
 
     private String listCompetitorsDetails() {
@@ -115,7 +135,18 @@ public class Competition {
     }
 
 
+    public void removeCompetitor(int competitorId) {
+    }
 
+    public Competitor getCompetitorById(int competitorId) {
+        return null;
+    }
+
+    public void amendCompetitor(Competitor existingCompetitor, Competitor newCompetitor) {}
+
+    public String generateReport() {
+        return null;
+    }
 }
 
 

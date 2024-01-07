@@ -36,7 +36,6 @@ public class Staff {
     }
 
     public void removeCompetitor(int competitorNumber) {
-        // Remove competitor by competitor number
         for (int i = 0; i < competitors.length; i++) {
             if (competitors[i] != null && competitors[i].getCompetitorNumber() == competitorNumber) {
                 competitors[i] = null;
@@ -72,7 +71,7 @@ public class Staff {
         addCompetitor(newCompetitor);
     }
 
-    public void readAndInsertFromCsvFile(String filePath) throws IOException, Exception {
+    public void readAndInsertFromCsvFile(String filePath) throws IOException, NumberFormatException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String data;
             while ((data = br.readLine()) != null) {
@@ -94,35 +93,138 @@ public class Staff {
                 Competitor c = new Competitor(competitorNumber, competitorFname, competitorLname, age, gender, level, country, scores);
                 addCompetitor(c);
             }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+            throw e; // Rethrow the exception after handling
         }
     }
 
     public void writeToFile(String filePath) throws IOException {
         try (FileWriter writer = new FileWriter(filePath)) {
-            for (Competitor competitor : competitorsList) {
+            for (Competitor competitor : competitors) {
                 if (competitor != null) {
                     writer.write(competitor.getFullDetails() + "\n");
                 }
             }
 
             // Write top overall score
-            writer.write("Top overall score: " + competition.findTopOverallScore() + "\n");
+            writer.write("Top overall score: " + this.findTopOverallScore() + "\n");
 
             // Write average overall scores
-            writer.write("Average Overall scores: " + competition.calculateOverallAverage() + "\n");
+            writer.write("Average Overall scores: " + this.calculateOverallAverage() + "\n");
 
             // Write maximum overall scores
-            ArrayList<Integer> maxOverallScoresList = competition.findMaxOverallScores();
-            writer.write("Maximum Overall scores are " + competition.scoresToString(maxOverallScoresList) + "\n");
+            ArrayList<Integer> maxOverallScoresList = this.findMaxOverallScores();
+            writer.write("Maximum Overall scores: " + this.scoresToString(maxOverallScoresList) + "\n");
 
             // Write minimum overall score
-            writer.write("Minimum Overall score is " + competition.findMinOverallScore() + "\n\n");
+            writer.write("Minimum Overall score: " + this.findMinOverallScore() + "\n\n");
 
             // Write frequency report
-            writer.write("Frequency report:\n" + competition.generateFrequencyReport() + "\n");
+            writer.write("Frequency report:\n" + this.generateFrequencyReport() + "\n");
         }
     }
-    
 
-   
+    private String findTopOverallScore() {
+        if (competitors.length == 0) {
+            return null;
+        }
+
+        double topScore = 0;
+        String topScorerDetails = "";
+
+        for (Competitor c : competitors) {
+            double overallScore = c.getOverallScore();
+            if (overallScore > topScore) {
+                topScore = overallScore;
+                topScorerDetails = c.getFullDetails();
+            }
+        }
+
+        return String.format("%.2f by %s", topScore, topScorerDetails);
+    }
+
+
+    private double calculateTotalOverallScores() {
+        double sum = 0;
+
+        for (Competitor c : competitors) {
+            sum += c.getOverallScore();
+        }
+
+        return sum;
+    }
+
+    private double calculateOverallAverage() {
+        double sum = calculateTotalOverallScores();
+
+        int numberOfCompetitors = competitors.length;
+        if (numberOfCompetitors == 0) {
+            return 0.0;
+        }
+
+        double average = sum / numberOfCompetitors;
+        return Math.round(average * 100.0) / 100.0;
+    }
+
+
+    private ArrayList<Integer> findMaxOverallScores() {
+        ArrayList<Integer> maxScores = new ArrayList<>();
+
+        for (Competitor c : competitors) {
+            int max = Integer.MIN_VALUE;
+            for (int score : c.getScores()) {
+                if (score > max) {
+                    max = score;
+                }
+            }
+            maxScores.add(max);
+        }
+
+        return maxScores;
+    }
+
+    private String scoresToString(ArrayList<Integer> list) {
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i < list.size(); i++) {
+            result.append(list.get(i));
+            if (i < list.size() - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("]");
+        return result.toString();
+    }
+
+    private String findMinOverallScore() {
+        double min = Double.POSITIVE_INFINITY;
+        String minScorerDetails = "";
+
+        for (Competitor c : competitors) {
+            double overallScore = c.getOverallScore();
+            if (overallScore < min) {
+                min = overallScore;
+                minScorerDetails = c.getFullDetails();
+            }
+        }
+
+        return String.format("%.2f by %s", min, minScorerDetails);
+    }
+
+    private String generateFrequencyReport() {
+        int[] scoresFrequency = new int[6];
+
+        for (Competitor c : competitors) {
+            for (int score : c.getScores()) {
+                scoresFrequency[score]++;
+            }
+        }
+
+        StringBuilder report = new StringBuilder("Scores Frequency Table:\n");
+        for (int i = 0; i < scoresFrequency.length; i++) {
+            report.append("Score ").append(i).append(": ").append(scoresFrequency[i]).append("\n");
+        }
+
+        return report.toString();
+    }
 }
