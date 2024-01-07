@@ -151,4 +151,17 @@ public class competitorList {
 
         return report.toString();
     }
+
+    public int getNextCompetitorNumber() {
+        int maxCompetitorNumber = 0;
+
+        for (Competitor competitor : competitorsList) {
+            int currentCompetitorNumber = competitor.getCompetitorNumber();
+            if (currentCompetitorNumber > maxCompetitorNumber) {
+                maxCompetitorNumber = currentCompetitorNumber;
+            }
+        }
+
+        return maxCompetitorNumber + 1;
+    }
 }
