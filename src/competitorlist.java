@@ -1,11 +1,11 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class Competition {
+public class competitorlist {
 
     private ArrayList<Competitor> competitorsList;
 
-    public Competition() {
+    public competitorlist() {
         this.competitorsList = new ArrayList<>();
     }
 
@@ -115,8 +115,4 @@ public class Competition {
     }
 
 
-
 }
-
-
-
