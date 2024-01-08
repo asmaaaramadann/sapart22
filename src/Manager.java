@@ -7,6 +7,7 @@ public class Manager {
     private String managerLname;
     private ArrayList<Competitor> competitors;
 
+    // Constructor
     public Manager(int managerID, String managerFname, String managerLname) {
         this.managerID = managerID;
         this.managerFname = managerFname;
@@ -14,6 +15,7 @@ public class Manager {
         this.competitors = new ArrayList<>();
     }
 
+    // Getter and Setter methods
     public int getManagerID() {
         return managerID;
     }
@@ -43,7 +45,7 @@ public class Manager {
 
     public void removeCompetitor(Competitor competitors) {
         competitors.remove(competitors);
-    }   // removes competitor by taking the object of a competitor and adding using remove keyword in array list
+    }
 
 
     public void ammendCompetitors(Competitor competitor, Competitor newDetails) {          // ammend method to edit a competitor

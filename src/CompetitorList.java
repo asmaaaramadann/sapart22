@@ -212,7 +212,7 @@ public class CompetitorList {
                 return competitor;
             }
         }
-        return null; // Return null if the competitor is not found
-    }
+        return null;
 
+    }
 }

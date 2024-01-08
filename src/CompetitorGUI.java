@@ -8,18 +8,22 @@ import java.util.ArrayList;
 
 
 public class CompetitorGUI {
+    // Instance variables
     private JFrame frame;
     private CompetitorList competitorList;
     private JTable competitorTable;
 
+    // Constructor
     public CompetitorGUI() {
+        // Initialize CompetitorList
         this.competitorList = new CompetitorList();
 
+        // Create JFrame
         frame = new JFrame("Competitor Management");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Create a table model with your data
+        // Create a table model with column headers
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("Competitor Number");
         tableModel.addColumn("First Name");
@@ -50,7 +54,7 @@ public class CompetitorGUI {
                     competitor.getScores()[2],
                     competitor.getScores()[3],
                     competitor.getScores()[4]
-                    // ... Add more data as needed
+
             };
             tableModel.addRow(rowData);
         }
@@ -61,6 +65,7 @@ public class CompetitorGUI {
         // Add the table to a scroll pane
         JScrollPane tableScrollPane = new JScrollPane(competitorTable);
 
+        // Create buttons with action listeners
         JButton addButton = new JButton("Add Competitor");
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -132,6 +137,7 @@ public class CompetitorGUI {
             }
         });
 
+// Create a panel for buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
@@ -140,6 +146,7 @@ public class CompetitorGUI {
         buttonPanel.add(reportButton);
         buttonPanel.add(closeButton);
 
+        // Set the layout and add components to the frame
         frame.setLayout(new BorderLayout());
         frame.add(buttonPanel, BorderLayout.NORTH);
         frame.add(tableScrollPane, BorderLayout.CENTER);
