@@ -71,15 +71,6 @@ public class Staff {
         addCompetitor(newCompetitor);
     }
 
-    private double calculateTotalOverallScores() {
-        double sum = 0;
-
-        for (Competitor c : competitors) {
-            sum += c.getOverallScore();
-        }
-
-        return sum;
-    }
 
 
     public void writeToFile(String file) {

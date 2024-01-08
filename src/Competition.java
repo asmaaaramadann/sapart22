@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Competition {
@@ -7,52 +7,49 @@ public class Competition {
     private int competitionID;
 
     private ArrayList<Competitor> competitorsList;
+    private ArrayList<Staff> staffList;
 
-    public Competition(String competitionName, int competitionID) {
-       this.competitionName = competitionName;
-       this.competitionID = competitionID;
+
+    public Competition(String competitionName, int competitionID) throws IOException {
+        this.competitionName = competitionName;
+        this.competitionID = competitionID;
         this.competitorsList = new ArrayList<>();
+        this.staffList = new ArrayList<>();
+        setupCompetitors();
+        setupStaff();
     }
-    private void setupCompetitors() throws IOException{
-        Competitor competitor1 = new Competitor(1, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor2 = new Competitor(2, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor3 = new Competitor(3, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor4 = new Competitor(4, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor5 = new Competitor(5, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor6 = new Competitor(6, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor7 = new Competitor(7, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor8 = new Competitor(8, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor9 = new Competitor(9, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor10 = new Competitor(10, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
-        Competitor competitor11 = new Competitor(11, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
 
-        competitorsList.add(competitor1);
-        competitorsList.add(competitor2);
-        competitorsList.add(competitor3);
-        competitorsList.add(competitor4);
-        competitorsList.add(competitor5);
-        competitorsList.add(competitor6);
-        competitorsList.add(competitor7);
-        competitorsList.add(competitor8);
-        competitorsList.add(competitor9);
-        competitorsList.add(competitor10);
-        competitorsList.add(competitor11);
-        CompetitorList.readAndInsertFromCsvFile("C:\\Users\\Asmaaa Ramadan\\IdeaProjects\\sapart22\\RunCompetitor.csv");
+    private void setupCompetitors() throws IOException {
+        CompetitorList competitorList = new CompetitorList();
+        competitorList.readAndInsertFromCsvFile("C:\\Users\\Asmaaa Ramadan\\IdeaProjects\\sapart22\\RunCompetitor.csv");
 
-
+        // Adding some default competitors
+        for (int i = 1; i <= 11; i++) {
+            Competitor competitor = new Competitor(i, "a", "b", 20, "female", "amateur", "UK", new int[]{2, 3, 4, 1, 5});
+            competitorsList.add(competitor);
+        }
     }
-    public String getcompetitionName() {
+
+    private void setupStaff() {
+        Staff staff1 = new Staff(300, 100);
+        Staff staff2 = new Staff(301, 102);
+        staffList.add(staff1);
+        staffList.add(staff2);
+    }
+
+    public String getCompetitionName() {
         return competitionName;
     }
+
     public void setCompetitionName(String competitionName) {
         this.competitionName = competitionName;
     }
 
-    public int getCompetitionID(){
+    public int getCompetitionID() {
         return competitionID;
     }
 
-    public void setCompetitionID(int competitionID){
+    public void setCompetitionID(int competitionID) {
         this.competitionID = competitionID;
     }
 
@@ -162,20 +159,15 @@ public class Competition {
     }
 
 
-    public void removeCompetitor(int competitorId) {
-    }
-
-    public Competitor getCompetitorById(int competitorId) {
-        return null;
-    }
-
-    public void amendCompetitor(Competitor existingCompetitor, Competitor newCompetitor) {}
-
-    public String generateReport() {
-        return null;
-    }
-
     public void addCompetitor(Competitor competitor) {
+    }
+    public static void main(String[] args) {
+        try {
+            Competition competition = new Competition("YourCompetitionName", 123);
+            // Perform other actions or invoke GUI here...
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

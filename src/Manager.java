@@ -37,8 +37,25 @@ public class Manager {
     public void setManagerLname(String managerLname) {
         this.managerLname = managerLname;
     }
+    public void addCompetitor(Competitor competitor) {                         // adds competitor by taking the object of a competitor and adding using add keyword in array list
+        competitors.add(competitor);
+    }
 
-    public String getCompetitorById(int id) {
+    public void removeCompetitor(Competitor competitors) {
+        competitors.remove(competitors);
+    }   // removes competitor by taking the object of a competitor and adding using remove keyword in array list
+
+
+    public void ammendCompetitors(Competitor competitor, Competitor newDetails) {          // ammend method to edit a competitor
+        if (competitors.contains(competitor)) {                                         //checks if the competitor is in the list
+            competitors.remove(competitor);                                              // if they r in the list then remove their current oobject and add a new one with edited details
+            competitors.add(newDetails);
+        } else {
+            System.out.println("competitor not found ");                          // if not in list prints  the message
+        }
+
+    }
+    public String getCompetitorByNumber(int id) {
         for (Competitor competitor : competitors) {
             int competitorId = competitor.getCompetitorNumber();
             if (competitorId == id) {
@@ -57,4 +74,5 @@ public class Manager {
 
         return result.toString();
     }
+
 }

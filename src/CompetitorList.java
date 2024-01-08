@@ -12,45 +12,43 @@ public class CompetitorList {
         competitorsList.add(competitor);
     }
 
-    public void removeCompetitor(int competitorNumber) {
-        Competitor toRemove = null;
-        for (Competitor competitor : competitorsList) {
-            if (competitor.getCompetitorNumber() == competitorNumber) {
-                toRemove = competitor;
-                break;
-            }
-        }
-        if (toRemove != null) {
-            competitorsList.remove(toRemove);
-        }
-    }
     public static void readAndInsertFromCsvFile(String filePath) throws IOException, NumberFormatException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            // Skip the header
+            br.readLine();
+
             String data;
             while ((data = br.readLine()) != null) {
                 String[] values = data.split(",");
-                int competitorNumber = Integer.parseInt(values[0]);
-                String competitorFname = values[1];
-                String competitorLname = values[2];
-                int age = Integer.parseInt(values[3]);
-                String gender = values[4];
-                String level = values[5];
-                String country = values[6];
-                int score1 = Integer.parseInt(values[7]);
-                int score2 = Integer.parseInt(values[8]);
-                int score3 = Integer.parseInt(values[9]);
-                int score4 = Integer.parseInt(values[10]);
-                int score5 = Integer.parseInt(values[11]);
-                int[] scores = {score1, score2, score3, score4, score5};
+                try {
+                    int competitorNumber = Integer.parseInt(values[0]);
+                    String competitorFname = values[1];
+                    String competitorLname = values[2];
+                    int age = Integer.parseInt(values[3]);
+                    String gender = values[4];
+                    String level = values[5];
+                    String country = values[6];
+                    int score1 = Integer.parseInt(values[7]);
+                    int score2 = Integer.parseInt(values[8]);
+                    int score3 = Integer.parseInt(values[9]);
+                    int score4 = Integer.parseInt(values[10]);
+                    int score5 = Integer.parseInt(values[11]);
+                    int[] scores = {score1, score2, score3, score4, score5};
 
-                Competitor c = new Competitor(competitorNumber, competitorFname, competitorLname, age, gender, level, country, scores);
-                addCompetitor(c);
+                    Competitor c = new Competitor(competitorNumber, competitorFname, competitorLname, age, gender, level, country, scores);
+                    addCompetitor(c);
+                } catch (NumberFormatException e) {
+                    System.err.println("Error parsing values: " + String.join(", ", values));
+                    e.printStackTrace();
+                }
             }
-        } catch (IOException | NumberFormatException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             throw e;
         }
     }
+
+
     public void writeToFile(String filePath) throws IOException {
         try (FileWriter writer = new FileWriter(filePath)) {
             for (Competitor competitor : competitorsList) {
