@@ -6,10 +6,13 @@ import java.io.IOException;
 
 public class CompetitorGUI {
     private JFrame frame;
-    private competitorList competitorList;
+    private CompetitorList competitorList;
 
     public CompetitorGUI() {
-        competitorList = new competitorList(); // You need to implement the CompetitorList class.
+        this.competitorList = new CompetitorList();
+
+
+
 
         frame = new JFrame("Competitor Management");
         frame.setSize(800, 600);
@@ -34,6 +37,10 @@ public class CompetitorGUI {
                     JOptionPane.showMessageDialog(frame, "Please select a competitor to edit.");
                 }
             }
+
+            private Competitor getSelectedCompetitor() {
+                return null;
+            }
         });
 
         JButton closeButton = new JButton("Close");
@@ -51,6 +58,7 @@ public class CompetitorGUI {
             }
         });
 
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);
@@ -63,9 +71,6 @@ public class CompetitorGUI {
         frame.setVisible(true);
     }
 
-//    private Competitor getSelectedCompetitor() {
-//
-//    }
 
 
     private void showAddCompetitorDialog() {
@@ -159,8 +164,7 @@ public class CompetitorGUI {
                 competitor.updateDetails(newFName, newLName, newAge, newGender, newLevel, newCountry, newScores);
 
                 editDialog.dispose();
-                // You may call a method to update the table or display
-                // For example, updateCompetitorsTable();
+
             }
         });
 

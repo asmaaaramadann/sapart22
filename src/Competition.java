@@ -13,7 +13,34 @@ public class Competition {
        this.competitionID = competitionID;
         this.competitorsList = new ArrayList<>();
     }
+    private void setupCompetitors() throws IOException{
+        Competitor competitor1 = new Competitor(1, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor2 = new Competitor(2, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor3 = new Competitor(3, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor4 = new Competitor(4, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor5 = new Competitor(5, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor6 = new Competitor(6, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor7 = new Competitor(7, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor8 = new Competitor(8, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor9 = new Competitor(9, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor10 = new Competitor(10, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
+        Competitor competitor11 = new Competitor(11, "a", "b", 20,"female", "amateur", "UK", new int[]{2,3,4,1,5} );
 
+        competitorsList.add(competitor1);
+        competitorsList.add(competitor2);
+        competitorsList.add(competitor3);
+        competitorsList.add(competitor4);
+        competitorsList.add(competitor5);
+        competitorsList.add(competitor6);
+        competitorsList.add(competitor7);
+        competitorsList.add(competitor8);
+        competitorsList.add(competitor9);
+        competitorsList.add(competitor10);
+        competitorsList.add(competitor11);
+        CompetitorList.readAndInsertFromCsvFile("C:\\Users\\Asmaaa Ramadan\\IdeaProjects\\sapart22\\RunCompetitor.csv");
+
+
+    }
     public String getcompetitionName() {
         return competitionName;
     }
@@ -146,6 +173,9 @@ public class Competition {
 
     public String generateReport() {
         return null;
+    }
+
+    public void addCompetitor(Competitor competitor) {
     }
 }
 
