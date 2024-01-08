@@ -306,11 +306,6 @@ public class CompetitorGUI {
 
 
 
-
-
-
-
-
     private void printFullDetails() {
         JTextArea detailsArea = new JTextArea();
         detailsArea.setEditable(false);
