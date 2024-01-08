@@ -55,15 +55,7 @@ public class Manager {
         }
 
     }
-    public String getCompetitorByNumber(int id) {
-        for (Competitor competitor : competitors) {
-            int competitorId = competitor.getCompetitorNumber();
-            if (competitorId == id) {
-                return competitor.getShortDetails();
-            }
-        }
-        return "Competitor not found";
-    }
+
 
     public String printCompetitorsList() {
         StringBuilder result = new StringBuilder();

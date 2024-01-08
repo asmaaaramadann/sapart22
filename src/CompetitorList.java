@@ -188,4 +188,31 @@ public class CompetitorList {
 
         return maxCompetitorNumber + 1;
     }
+
+    public Competitor[] getCompetitors() {
+        return new Competitor[0];
+    }
+
+    public void removeCompetitor(int competitorNumber) {
+        Competitor foundCompetitor = null;
+        for (Competitor competitor : competitorsList) {
+            if (competitor.getCompetitorNumber() == competitorNumber) {
+                foundCompetitor = competitor;
+                break;
+            }
+        }
+        if (foundCompetitor != null) {
+            competitorsList.remove(foundCompetitor);
+        }
+    }
+
+    public Competitor getCompetitorByNumber(int number) {
+        for (Competitor competitor : competitorsList) {
+            if (competitor.getCompetitorNumber() == number) {
+                return competitor;
+            }
+        }
+        return null; // Return null if the competitor is not found
+    }
+
 }
